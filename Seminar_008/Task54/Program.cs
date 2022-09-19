@@ -1,14 +1,12 @@
-﻿// Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и возвращает значение этого элемента или же указание, что такого элемента нет.
-
+﻿// Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
 // Например, задан массив:
-
 // 1 4 7 2
-
 // 5 9 2 3
-
 // 8 4 2 4
-
-// 17 -> такого числа в массиве нет
+// В итоге получается вот такой массив:
+// 7 4 2 1
+// 9 5 3 2
+// 8 4 4 2
 
 Console.Clear();
 
@@ -33,19 +31,26 @@ int [,] CreateNewArray ()
     return array;
 }
 
-void FindValueIndexArray (int [,] array)
+void OrdererdArray (int [,] array)
 {
-    Console.Write("Input the number of rows:");
-    int numIndex1 = Convert.ToInt32(Console.ReadLine());
-
-    Console.Write("Input the number of columns:");
-    int numIndex2 = Convert.ToInt32(Console.ReadLine());
-
-    int [,] newArray = new int [numIndex1, numIndex2];
-    if (numIndex1 < 0 || numIndex1 > array.GetLength(0) || numIndex2 < 0 || numIndex2 > array.GetLength(1))
-        Console.WriteLine("The element does not exist");
-    else
-        Console.WriteLine($"Value of an array element {array[numIndex1, numIndex2]}");
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            {
+                for (int k = 0; k < array.GetLength(1)-1; k++)
+                {
+                    if (array [i, k] < array[i, k+1])
+                    {
+                        int temp = array [i, k+1];
+                        array [i, k+1] = array [i, k];
+                        array [i, k] = temp;
+                    }
+                }
+            }
+            
+        }
+    }
 }
 
 void Show2dArray (int[,] array)
@@ -61,4 +66,5 @@ void Show2dArray (int[,] array)
 
 int [,] myArray = CreateNewArray();
 Show2dArray(myArray);
-FindValueIndexArray(myArray);
+OrdererdArray(myArray);
+Show2dArray(myArray);
